@@ -11,7 +11,7 @@ const UpdateStudent = () => {
     console.log(location)
     const submithandler=(e)=>{
         e.preventDefault();
-        const db = getDatabase(app)
+        const db = getDatabase()
         const studentRef = ref(db, 'student/' + location.state[0])
         update(studentRef, {
             studentName: name,
