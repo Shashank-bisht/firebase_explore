@@ -4,15 +4,29 @@ const Dashboard = () => {
   return (
     <div style={{ display: "flex", flexDirection: "row" }}>
       <div style={{ width: "30%", backgroundColor: "red", height: "100vh" }}>
-        <Link to='/addStudent'
+        <Link
+          to="/addStudent"
           style={{ textDecoration: "none", display: "block", color: "white" }}
         >
           Add student
         </Link>
-        <Link to='/studentList'
+        <Link
+          to="/studentList"
           style={{ textDecoration: "none", display: "block", color: "white" }}
         >
           Student List
+        </Link>
+        <Link
+          to="/addFaculty"
+          style={{ textDecoration: "none", display: "block", color: "white" }}
+        >
+          Add Faculty
+        </Link>
+        <Link
+          to="/facultyList"
+          style={{ textDecoration: "none", display: "block", color: "white" }}
+        >
+          Faculty List
         </Link>
       </div>
       <div style={{ width: "70%", backgroundColor: "green", height: "100vh" }}>

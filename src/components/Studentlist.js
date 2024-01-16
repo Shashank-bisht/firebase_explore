@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
-
+import { app } from "../firebase";
+import {getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
 const Studentlist = () => {
   const [studentdata, setstudentdata] = useState(null);
   const navigate = useNavigate();
@@ -20,8 +21,15 @@ const Studentlist = () => {
   }, []);
   const deletedata = (key) => {
     const db = getDatabase();
+    const storage = getStorage(app)
     const studentref = ref(db, "student/" + key);
-    remove(studentref);
+    const myref = sRef(storage, 'images/' + key);
+    deleteObject(myref).then(() => {
+      remove(studentref);
+    }).catch((error) => {
+      console.log(error)
+    })
+   
   };
 
   return (
