@@ -7,9 +7,14 @@ import UpdateStudent from "./components/UpdateStudent";
 import AddFaculty from "./components/AddFaculty";
 import FacultyList from "./components/FacultyList";
 import UpdateFaculty from "./components/UpdateFaculty";
+import Signup from './components/Signup'
+import Login from "./components/Login";
+
 const myRouter = createBrowserRouter([
+  {path:'signup',Component:Signup},
+  {path:'login',Component:Login},
   {
-    path: "",
+    path: "dashboard",
     Component: Dashboard,
     children: [
       { path: "", Component: Studentlist },
@@ -27,6 +32,7 @@ function App() {
     <>
       <div className="App">
         <RouterProvider router={myRouter} />
+        {/* RouterProvider will use the routing configuration specified in myRouter to manage the navigation and rendering of components based on the current URL. */}
       </div>
     </>
   );

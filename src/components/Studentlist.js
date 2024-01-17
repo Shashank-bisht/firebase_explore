@@ -3,7 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getDatabase, onValue, ref, remove, set } from "firebase/database";
 import { app } from "../firebase";
-import {getStorage, ref as sRef, uploadBytes, getDownloadURL, deleteObject} from "firebase/storage";
+import {getStorage, ref as sRef, deleteObject} from "firebase/storage";
+
+
 const Studentlist = () => {
   const [studentdata, setstudentdata] = useState(null);
   const navigate = useNavigate();
@@ -29,7 +31,7 @@ const Studentlist = () => {
     }).catch((error) => {
       console.log(error)
     })
-   
+  
   };
 
   return (
@@ -49,10 +51,10 @@ const Studentlist = () => {
                 <button
                   onClick={() => {
                     // passing state information to target route
-                    navigate("/updateStudent", { state: [key, value] });
+                    navigate("/dashboard/updateStudent", { state: [key, value] });
                   }}
                 >
-                  Update
+                update
                 </button>
               </div>
             );

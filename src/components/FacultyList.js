@@ -15,12 +15,14 @@ const navigate = useNavigate()
         const facultyCollection = collection(db, "faculty");
         // getDocs to get all the documents
         const docsnap = await getDocs(facultyCollection);
-        console.log(docsnap)
+        // console.log(docsmap) docsmap is a object
+      // using docs is a convention in firebase
         const data = docsnap.docs.map(doc => ({
             id: doc.id,
             ...doc.data()
         }));
-    
+    //...doc.data() creates a new object by copying all the properties from the object returned by doc.data().
+
         // console.log(data);
         setfacultydata(data)
     };
@@ -37,12 +39,13 @@ const navigate = useNavigate()
   return (
     <div>
         <h1>faculty list</h1>
+        {/* data is an object but facultydata is an array of objects */}
         {facultydata.map((data)=>{
             return <div key={data.id}>
               <p>Name :  {data.facultyname}</p>
               <p>phone :  {data.phonenumber}</p>
               <button onClick={()=>deletedata(data.id)}>Delete</button>
-              <button onClick={()=>{navigate('/updatefaculty',{state:data})}}>Update</button>
+              <button onClick={()=>{navigate('/dashboard/updatefaculty',{state:data})}}>Update</button>
               </div>
         })}
     </div>

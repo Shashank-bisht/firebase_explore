@@ -21,7 +21,7 @@ const UpdateFaculty = () => {
         facultyname: name,
         phonenumber: phone
     })
-     navigate("/facultyList")
+     navigate("/dashboard/facultyList")
     }
   return (
     <div>
@@ -33,6 +33,7 @@ const UpdateFaculty = () => {
             <input value={phone} onChange={(e)=>setPhone(e.target.value)} type="text" placeholder='number' />
             <button type="submit">update</button>
         </form>
+
     </div>
   )
 }
