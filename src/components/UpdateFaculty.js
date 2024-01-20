@@ -9,6 +9,7 @@ const UpdateFaculty = () => {
     const navigate = useNavigate();
     const location = useLocation()
     console.log(location)
+    // i am using location to get default data in the inputs and this state is passed from faculty list component
     const [name,setName]=useState(location.state.facultyname)
     const [phone,setPhone] = useState(location.state.phonenumber)
     
