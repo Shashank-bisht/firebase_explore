@@ -7,6 +7,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setphone] = useState(null);
+  const [isOtp, setIsOtp] = useState(false);
+  const [code, setCode] = useState("");
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
@@ -32,15 +34,26 @@ const Login = () => {
       console.error(err);
     }
   };
-  const sendotp = async () => {
+  const sendotp =  () => {
     const auth = getAuth(app);
-    const appVerifier = new RecaptchaVerifier("recaptcha-container", {}, auth);
-    signInWithPhoneNumber(auth, phone, appVerifier).then(confirmationResult => {
-      window.confirmationResult = confirmationResult;
-      console.log(confirmationResult);
+    const appVerifier = new RecaptchaVerifier(auth, "recaptcha-container",{});
+    signInWithPhoneNumber(auth, phone,appVerifier ).then(res => {
+      window.confirmationResult = res;
+      console.log(res);
+      console.log("otp sent")
+      navigate('/dashboard');
+      setIsOtp(true)
     }).catch(err => {
         console.log(err);
     })
+  }
+
+  const confirmOtp =()=>{
+ window.confirmationResult.confirm(code).then((res)=>{
+   console.log(res)
+ }).catch((err)=>{
+   console.log(err)
+ })
   }
   return (
     <div>
@@ -61,9 +74,26 @@ const Login = () => {
         <button onClick={signInWithGoogle}>Login with Google</button>
       </form>
       <br />
-      <h1>login with otp</h1>
-      <input type="text" onChange={(e) => setphone(e.target.value)} placeholder="phone number"/>
-      <button type="button" onClick={sendotp}>send otp</button>
+{!isOtp ?
+      <div>
+        <h1>login with otp</h1>
+        <input
+          type="text"
+          onChange={(e) => setphone(e.target.value)}
+          placeholder="phone number"
+        />
+        <div id="recaptcha-container"></div>
+        <button type="button" onClick={sendotp}>
+          send otp
+        </button>
+      </div>
+:
+<div>
+<h3>Confirm OTP</h3>
+<input type="text" onChange={(e)=>setCode(e.target.value)} />
+<button type="button" onClick={confirmOtp}>Submit otp</button>
+</div>
+}
     </div>
   );
 };
